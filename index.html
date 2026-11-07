@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise 💗</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg,#ffb6d9,#c8a2ff,#a8d8ff);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #60345f;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 35px 18px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.card {
+  background: rgba(255,255,255,0.88);
+  padding: 28px 18px;
+  border-radius: 25px;
+  box-shadow: 0 10px 35px #754d7540;
+}
+
+.heart {
+  font-size: 55px;
+  animation: beat 1s infinite alternate;
+}
+
+@keyframes beat {
+  to { transform: scale(1.18); }
+}
+
+h1 {
+  color: #e64d94;
+  font-size: 30px;
+}
+
+.subtitle {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.date {
+  font-size: 18px;
+  font-weight: bold;
+  color: #bd438c;
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 7px;
+  margin: 25px 0;
+}
+
+.time {
+  background: #ffe0ef;
+  padding: 13px 3px;
+  border-radius: 13px;
+}
+
+.time strong {
+  display: block;
+  font-size: 25px;
+  color: #d83f91;
+}
+
+.time small {
+  font-size: 11px;
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 15px 23px;
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(90deg,#ff62a5,#bd75f5);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 15px #d77bb755;
+}
+
+button:active {
+  transform: scale(.95);
+}
+
+.gift {
+  font-size: 75px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+#surprise {
+  display: none;
+  margin-top: 25px;
+  padding: 20px;
+  background: #ffe0ef;
+  border-radius: 18px;
+  animation: appear .7s ease;
+}
+
+#surprise h2 {
+  color: #e33d8c;
+  font-size: 26px;
+}
+
+@keyframes appear {
+  from {opacity:0; transform:scale(.5);}
+  to {opacity:1; transform:scale(1);}
+}
+
+#birthday {
+  display: none;
+  font-size: 22px;
+  color: #d83f91;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+footer {
+  margin-top: 25px;
+  font-size: 13px;
+}
+
+.confetti {
+  position: fixed;
+  top: -20px;
+  font-size: 22px;
+  pointer-events: none;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="card">
+
+<div class="heart">💗</div>
+
+<h1>Someone Special's Birthday!</h1>
+
+<p class="subtitle">
+A little surprise is waiting for you...
+Someone is getting older! 🤣
+</p>
+
+<p class="date">🎂 28 NOVEMBER 2026 🎂</p>
+
+<h3>COUNTDOWN TO YOUR 20TH BIRTHDAY</h3>
+
+<div class="countdown">
+  <div class="time">
+    <strong id="days">00</strong>
+    <small>Days</small>
+  </div>
+  <div class="time">
+    <strong id="hours">00</strong>
+    <small>Hours</small>
+  </div>
+  <div class="time">
+    <strong id="minutes">00</strong>
+    <small>Minutes</small>
+  </div>
+  <div class="time">
+    <strong id="seconds">00</strong>
+    <small>Seconds</small>
+  </div>
+</div>
+
+<div id="birthday">
+🎉 HAPPY 20TH BIRTHDAY! 🎉
+</div>
+
+<hr style="border:1px solid #ffd0e6">
+
+<h3>🎁 A SPECIAL GIFT FOR YOU</h3>
+
+<p>Are you ready to open your gift?</p>
+
+<div class="gift">🎁</div>
+
+<button onclick="openGift()">
+OPEN YOUR GIFT 🎀
+</button>
+
+<div id="surprise">
+  <div style="font-size:55px">🤣🎁👻</div>
+  <h2>KHILAI LANG IA YIII!!!</h2>
+  <p>
+    Surpriseeeee!!! 😂😂
+  </p>
+  <p>
+    No expensive gift for you this time!
+    Just a little birthday prank from someone
+    who remembered your special day! 💗
+  </p>
+  <h2>LOVE YOU & STAY HAPPY! 🥳</h2>
+</div>
+
+<footer>
+Made with 💗 just for your special day.
+</footer>
+
+</div>
+</div>
+
+<script>
+
+// Birthday date in India (November 28, 2026)
+const birthday = new Date("2026-11-28T00:00:00+05:30");
+
+function updateCountdown() {
+  const now = new Date();
+  let difference = birthday - now;
+
+  if (difference <= 0) {
+    document.getElementById("days").textContent = "00";
+    document.getElementById("hours").textContent = "00";
+    document.getElementById("minutes").textContent = "00";
+    document.getElementById("seconds").textContent = "00";
+    document.getElementById("birthday").style.display = "block";
+    return;
+  }
+
+  const days = Math.floor(difference / 86400000);
+  const hours = Math.floor((difference % 86400000) / 3600000);
+  const minutes = Math.floor((difference % 3600000) / 60000);
+  const seconds = Math.floor((difference % 60000) / 1000);
+
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours;
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+function openGift() {
+  document.getElementById("surprise").style.display = "block";
+
+  document.querySelector(".gift").textContent = "🎉";
+
+  document.getElementById("surprise").scrollIntoView({
+    behavior: "smooth"
+  });
+
+  const emojis = ["💗","🎉","🎊","💝","✨","🤣","🎂"];
+
+  for(let i=0;i<35;i++) {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.textContent =
+      emojis[Math.floor(Math.random()*emojis.length)];
+
+    confetti.style.left = Math.random()*100 + "vw";
+    confetti.style.animationDelay = Math.random()*1.5 + "s";
+
+    document.body.appendChild(confetti);
+
+    setTimeout(()=>confetti.remove(),5000);
+  }
+}
+
+</script>
+
+</body>
+</html>
+
